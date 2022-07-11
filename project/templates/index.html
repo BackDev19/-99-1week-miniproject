@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+
+    <style>
+        .modal_layer{
+            width: 500px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px 1px gray;
+            padding: 10px;
+            position: absolute;
+            top:50%;
+            left: 50%;
+            border-radius: 5px;
+            transform: translate(-50%,-50%);
+            z-index: 9999;
+        }
+
+        .modal_layer #formFile {
+            margin-top: 10px;
+        }
+
+        #exampleFormControlTextarea1{
+            margin-top: 10px;
+        }
+
+        #thumbnailImg{
+            width:100%;
+            height:100px;
+            background-color: red;
+        }
+
+        #cardImg{
+            width:100px;
+            height:100px;
+            overflow: hidden;
+        }
+
+        #submit{
+            margin-top:20px;
+        }
+
+        #list-box{
+            margin-top:50px;
+            display: flex;
+        }
+
+        .modal_title{
+            font-size: 15px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            show_list()
+        });
+
+        function show_list() {
+            $.ajax({
+                type: 'GET',
+                url: '/submit',
+                data: {},
+                success: function (response) {
+                    let rows = response['orders']
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['title']
+                        let imgUrl = rows[i]['img']
+                        let comment = rows[i]['comment']
+                        let temp_html = `<div class="card" style="width: 18rem;">
+                                          <img src="${imgUrl}" class="card-img-top" alt="...">
+                                          <div class="card-body">
+                                            <h5 class="card-title">${title}</h5>
+                                            <p class="card-text">${comment}</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                          </div>
+                                        </div>
+                                        `
+                        $('#list-box').append(temp_html)
+                    }
+                }
+            });
+        }
+
+        function uploadImgPreview() {
+            // @breif 업로드 파일 읽기
+            let fileInfo = document.getElementById("upImgFile").files[0];
+
+            let reader = new FileReader();
+            // @details readAsDataURL( )을 통해 파일을 읽어 들일때 onload가 실행
+            reader.onload = function() {
+            // @details 파일의 URL을 Base64 형태로 가져온다.
+            // document.getElementById("thumbnailImg").style.background = `url(${reader.result})center/cover`;
+            document.getElementById("thumbnailImg").src = reader.result
+            };
+            // @details readAsDataURL( )을 통해 파일의 URL을 읽어온다.
+            if (fileInfo) {
+                return reader.readAsDataURL(fileInfo);
+            }
+        }
+
+        function submit_card(){
+
+            let title = $('.title').val();
+            let imgFlie = document.getElementById("thumbnailImg").src
+
+            let comment = $('.comment').val();
+            $.ajax({
+                type: 'POST',
+                url: '/submit',
+                data: {title_give : title, img_give : imgFlie, comment_give : comment},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
+        }
+
+
+
+
+    </script>
+</head>
+<body>
+    <div class="modal_layer">
+        <h4 class="modal_title">글작성</h4>
+        <div class="mb-3">
+            <img id="thumbnailImg" src="">
+            <input type="text" class="form-control title" id="formGroupExampleInput" placeholder="제목을 입력하세요">
+            <input class="form-control" type="file" id="upImgFile" onchange="uploadImgPreview();" accept="image/*" />
+            <textarea class="form-control comment" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <button type="button" class="btn btn-primary" id="submit" onclick="submit_card();">등록하기</button>
+        </div>
+    </div>
+    <div id="list-box">
+    </div>
+</body>
+</html>
