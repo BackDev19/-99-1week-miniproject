@@ -1,4 +1,4 @@
-**1week-project**<br>
+
 ## 프로젝트 명<br>
 ### GADA ( 가다 )<br><br>
 ---
