@@ -30,6 +30,8 @@ https://github.com/BackDev19/1week-miniproject<br><br>
 <img alt="Jinja" src ="https://img.shields.io/badge/Jinja2-B41717.svg?&style=for-the-badge&logo=Jinja&logoColor=white"/>
 <img alt="Python" src ="https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white"/>
 <img alt="MongoDB" src ="https://img.shields.io/badge/MongoDB-47A248.svg?&style=for-the-badge&logo=MongoDB&logoColor=white"/>
+<img alt="Flask" src ="https://img.shields.io/badge/flask-4A154B.svg?&style=for-the-badge&logo=Flask&logoColor=white"/>
+<img alt="Aws" src ="https://img.shields.io/badge/aws-232F3E.svg?&style=for-the-badge&logo=Amazon AWS&logoColor=white"/>
 
 ```
 사용된 패키지들
