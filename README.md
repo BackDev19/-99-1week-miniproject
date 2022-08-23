@@ -6,6 +6,9 @@
 ### 소개<br>
 #### * 추천할만한 여행지나 맛집 같은 곳 후기를 등록하고 다른 유저들이 댓글을 남길 수 있는 사이트.<br><br>
 [시연 영상] (https://www.youtube.com/watch?v=COXfOHqGyew)
+
+https://user-images.githubusercontent.com/80199125/186281000-a3673741-d5d8-43b2-b24d-82430b3f2acf.mp4
+
 <br>[개발 블로그] (https://ingwon.tistory.com/2)
 
 ### 와이어 프레임<br>
